@@ -1,0 +1,25 @@
+Cifrado Cesar
+clc, clear all, close all, format compact
+%Input
+texto_claro = 'Texto que desea cifrar';
+%Precesses
+ascii = double(texto_claro);
+
+for n = 1:length(ascii)
+    if ascii(n) == 32
+        cesar(n) = ascii(n);
+    elseif (ascii(n) >= 88 && ascii(n) <= 90) || (ascii(n) >= 120 && ascii(n) <= 122)
+        cesar(n) = ascii(n) - 23;
+    else
+        cesar(n) = ascii(n) + 3;
+    end
+end
+
+bits = dec2bin(cesar); %Pasamos a bit
+%Concatenar 0 -> byte
+for n=1:length(texto_claro)
+   bytes(n,:) = cat(2,'0',bits(n,:));
+end
+bytestream = reshape(bytes,1,[])
+%Ahora cifraremos con cifrado cesar
+criptograma = char(cesar)
